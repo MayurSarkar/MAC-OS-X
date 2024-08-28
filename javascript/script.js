@@ -132,65 +132,127 @@ $(function () {
     $(".maps").draggable();
   });
 
-  let terminal_line_html = $(".terminal_line").html();
-let path = "~";
-let dirName;
-let dirs = ["Desktop", "Downloads", "Music", "Documents"];
+ // Initialize terminal line HTML template
+let terminalLineHTML = $(".terminal_line").html();
+let path = "~"; // Current directory path
+let dirs = ["Desktop", "Downloads", "Music", "Documents"]; // Initial directories
 
-function init_terminal_line() {
-  $(".cursor").keydown(function (e) {
-    // trap the return key being pressed
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      let command = $(this).html();
-      if (!command) return;
-      let command_output = "zsh: command not found: " + command + "<br>";
-
-      if (command.startsWith("cd ")) {
-        path = command.substring(3);
-        command_output = "";
-      } else if (command === "ls") {
-        command_output = dirs.join("\t");
-      } else if (command === "pwd") {
-        command_output = path + "/";
-      } else if (command.startsWith("mkdir ")) {
-        dirName = command.substring(6);
-        dirs.push(dirName);
-        command_output = "";
-      } else if (command === "rmdir") {
-        dirs.pop();
-        command_output = "";
-      } else if (command === "ps -aux") {
-        command_output = "CPU = 56% <br> MEMORY = 25% <br> DISK = 34%";
-      } else if (command.startsWith("cat ")) {
-        command_output =
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Fugiat nihil totam expedita sint necessitatibus quos ducimus.";
-      } else if (command.startsWith("du -hs ")) {
-        command_output = Math.floor(Math.random() * 100) + "GB";
-      }
-
-      $(this).removeAttr("contenteditable");
-      $(this).removeClass("cursor");
-      terminalApp.content
-        .append(command_output)
-        .append(terminal_line_html.replace("~", path));
-      placeCaretAtEnd(document.querySelector(".cursor"));
-      init_terminal_line();
-    }
-  });
+// Initialize the terminal input line
+function initTerminalLine() {
+  $(".cursor").keydown(handleCommand);
 }
 
-init_terminal_line();
-terminalApp.content.addEventListener("click", function () {
+// Handle command input when the Enter key is pressed
+function handleCommand(e) {
+  if (e.keyCode !== 13) return; // Only act on Enter key
+  e.preventDefault();
+
+  let command = $(this).text().trim(); // Get and trim the command
+  if (!command) return; // If empty, do nothing
+
+  let commandOutput = executeCommand(command); // Execute the command
+
+  updateTerminal(command, commandOutput); // Update terminal with command and output
+  initTerminalLine(); // Re-initialize for next input
+}
+
+// Execute the command entered by the user
+function executeCommand(command) {
+  if (command.startsWith("cd ")) {
+    return changeDirectory(command.substring(3));
+  } else if (command === "ls") {
+    return listDirectories();
+  } else if (command === "pwd") {
+    return showPath();
+  } else if (command.startsWith("mkdir ")) {
+    return createDirectory(command.substring(6));
+  } else if (command === "rmdir") {
+    return removeDirectory();
+  } else if (command === "ps -aux") {
+    return showSystemStats();
+  } else if (command.startsWith("cat ")) {
+    return displayFileContent();
+  } else if (command.startsWith("du -hs ")) {
+    return showDiskUsage();
+  } else {
+    return `zsh: command not found: ${command}<br>`;
+  }
+}
+
+// Change directory
+function changeDirectory(newPath) {
+  if (newPath) {
+    path = newPath;
+    return "";
+  }
+  return "Invalid directory name";
+}
+
+// List directories
+function listDirectories() {
+  return dirs.join("\t");
+}
+
+// Show the current path
+function showPath() {
+  return `${path}/`;
+}
+
+// Create a new directory
+function createDirectory(dirName) {
+  if (dirName && !dirs.includes(dirName)) {
+    dirs.push(dirName);
+    return "";
+  }
+  return "Directory already exists or invalid name";
+}
+
+// Remove the last directory (for simplicity)
+function removeDirectory() {
+  if (dirs.length > 0) {
+    dirs.pop();
+    return "";
+  }
+  return "No directories to remove";
+}
+
+// Display system stats (mock)
+function showSystemStats() {
+  return "CPU = 56% <br> MEMORY = 25% <br> DISK = 34%";
+}
+
+// Display file content (mock)
+function displayFileContent() {
+  return "Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>Fugiat nihil totam expedita sint necessitatibus quos ducimus.";
+}
+
+// Show disk usage (mock)
+function showDiskUsage() {
+  return Math.floor(Math.random() * 100) + "GB";
+}
+
+// Update the terminal with the new command and output
+function updateTerminal(command, commandOutput) {
+  $(".cursor").removeAttr("contenteditable").removeClass("cursor");
+  terminalApp.content.append(commandOutput).append(terminalLineHTML.replace("~", path));
+  placeCaretAtEnd(document.querySelector(".cursor"));
+}
+
+// Place the caret at the end of the input line
+function placeCaretAtEnd(el) {
+  el.focus();
+  let range = document.createRange();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  let sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+// Initialize the first terminal line
+initTerminalLine();
+
+// Ensure the caret is placed correctly when clicking on the terminal content
+terminalApp.content.addEventListener("click", () => {
   placeCaretAtEnd(document.querySelector(".cursor"));
 });
-
-function placeCaretAtEnd(el) {
-    el.focus();
-    var range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    var sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  }
