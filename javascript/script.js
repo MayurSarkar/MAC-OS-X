@@ -1,86 +1,100 @@
 /********** ELEMENTS **********/
 const elements = {
-    body: document.querySelector("body"),
-    navbar: document.querySelector(".navbar"),
-    open_spotlight: document.querySelector(".open_Search"),
-    spotlight_search: document.querySelector(".spotlight_serach"),
-    brightness_range: document.getElementById("brightness"),
-    sound_range: document.getElementById("sound"),
-    clockElement: document.getElementById("clock"),
-    clockWrapper: document.querySelector(".clock"),
-    widgetsPanel: document.querySelector(".widgets-panel"),
-    batteryButton: document.querySelector(".battery"),
-    batteryText: document.querySelector(".battery__text"),
-    batteryPopup: document.querySelector(".battery__popup"),
-    batteryPopupText: document.querySelector(".battery__popup header span"),
-    batteryProgress: document.querySelector(".battery__progress"),
-    batteryIsChargingLogo: document.querySelector(".is-charging"),
-    powerSource: document.querySelector(".power-source"),
-  };
+  body: document.querySelector("body"),
+  navbar: document.querySelector(".navbar"),
+  open_spotlight: document.querySelector(".open_Search"),
+  spotlight_search: document.querySelector(".spotlight_serach"),
+  brightness_range: document.getElementById("brightness"),
+  sound_range: document.getElementById("sound"),
+  clockElement: document.getElementById("clock"),
+  clockWrapper: document.querySelector(".clock"),
+  widgetsPanel: document.querySelector(".widgets-panel"),
+  batteryButton: document.querySelector(".battery"),
+  batteryText: document.querySelector(".battery__text"),
+  batteryPopup: document.querySelector(".battery__popup"),
+  batteryPopupText: document.querySelector(".battery__popup header span"),
+  batteryProgress: document.querySelector(".battery__progress"),
+  batteryIsChargingLogo: document.querySelector(".is-charging"),
+  powerSource: document.querySelector(".power-source"),
+};
+
+// Notes App
+const notesApp = {
+  app_name: document.querySelector("#Notes"),
+  window: document.querySelector(".note"),
+  full: document.querySelector(".full-note"),
+  close: document.querySelector(".close-note"),
+  backfull: document.querySelector(".backfull-note"),
+  point: document.querySelector("#point-note"),
+  adding: document.querySelector(".adding"),
+  deleting: document.querySelector(".deleting"),
+  content_typing: document.querySelector(".content__typing"),
+  opening: document.querySelector(".open-note"),
+};
 
 // Terminal App
 const terminalApp = {
-    app_name: document.querySelector("#Terminal"),
-    window: document.querySelector(".terminal"),
-    full: document.querySelector(".full"),
-    close: document.querySelector(".close"),
-    backfull: document.querySelector(".backfull"),
-    point: document.querySelector("#point-terminal"),
-    content: document.querySelector(".terminal .terminal_content"),
-    taskbar: document.querySelector(".terminal .window__taskbar"),
-    opening: document.querySelector(".open-terminal")
+  app_name: document.querySelector("#Terminal"),
+  window: document.querySelector(".terminal"),
+  full: document.querySelector(".full"),
+  close: document.querySelector(".close"),
+  backfull: document.querySelector(".backfull"),
+  point: document.querySelector("#point-terminal"),
+  content: document.querySelector(".terminal .terminal_content"),
+  taskbar: document.querySelector(".terminal .window__taskbar"),
+  opening: document.querySelector(".open-terminal"),
 };
 
 // Maps App
 const mapsApp = {
-    app_name: document.querySelector("#map"),
-    window: document.querySelector(".maps"),
-    full: document.querySelector(".full-map"),
-    close: document.querySelector(".close-map"),
-    backfull: document.querySelector(".backfull-map"),
-    point: document.querySelector("#point-maps"),
-    opening: document.querySelector(".open-map")
-  };
+  app_name: document.querySelector("#map"),
+  window: document.querySelector(".maps"),
+  full: document.querySelector(".full-map"),
+  close: document.querySelector(".close-map"),
+  backfull: document.querySelector(".backfull-map"),
+  point: document.querySelector("#point-maps"),
+  opening: document.querySelector(".open-map"),
+};
 
 // Launchpad
 const launchpad = {
-    container: document.querySelector(".container__Window"),
-    window: document.querySelector(".launchpad"),
-    searchbox: document.querySelector(".launchpad .searchbox"),
-    app_container: document.querySelector(".Apps-container"),
-    point: document.querySelector("#point-launchpad"),
-    opening: document.querySelector(".open-lunchpad")
-  };
-  
-  function handleMinimize(Minimize) {
-    Minimize.style.maxWidth = "80%";
-    Minimize.style.minWidth = "70%";
-    Minimize.style.height = "430px";
-  }
-  
-  function handleFullScreen(maximize) {
-    maximize.style.maxWidth = "95%";
-    maximize.style.minWidth = "95%";
-    maximize.style.height = "90%";
-  }
-  
-  function close_window(close, point, appName) {
-    close.style.display = "none";
-    point.style.display = "none";
-    appName.style.display = "none";
-  }
-  
-  function open_window(open, point, appName) {
-    elements.navbar.style.display = "flex";
-    open.style.display = "block";
-    launchpad.container.style.display = "flex";
-    launchpad.window.style.display = "none";
-    launchpad.point.style.display = "none";
-    appName.style.display = "block";
-    point.style.display = "block";
-  }
+  container: document.querySelector(".container__Window"),
+  window: document.querySelector(".launchpad"),
+  searchbox: document.querySelector(".launchpad .searchbox"),
+  app_container: document.querySelector(".Apps-container"),
+  point: document.querySelector("#point-launchpad"),
+  opening: document.querySelector(".open-lunchpad"),
+};
 
-  // Launchpad function start
+function handleMinimize(Minimize) {
+  Minimize.style.maxWidth = "80%";
+  Minimize.style.minWidth = "70%";
+  Minimize.style.height = "430px";
+}
+
+function handleFullScreen(maximize) {
+  maximize.style.maxWidth = "95%";
+  maximize.style.minWidth = "95%";
+  maximize.style.height = "90%";
+}
+
+function close_window(close, point, appName) {
+  close.style.display = "none";
+  point.style.display = "none";
+  appName.style.display = "none";
+}
+
+function open_window(open, point, appName) {
+  elements.navbar.style.display = "flex";
+  open.style.display = "block";
+  launchpad.container.style.display = "flex";
+  launchpad.window.style.display = "none";
+  launchpad.point.style.display = "none";
+  appName.style.display = "block";
+  point.style.display = "block";
+}
+
+// Launchpad function start
 launchpad.opening.addEventListener("click", handleOpenLaunching);
 
 function handleOpenLaunching() {
@@ -111,28 +125,28 @@ function handleLaunchpadSearch(e) {
 handleOpenLaunching();
 
 terminalApp.close.addEventListener("click", () =>
-    close_window(terminalApp.window, terminalApp.point, terminalApp.app_name)
+  close_window(terminalApp.window, terminalApp.point, terminalApp.app_name)
 );
 
 terminalApp.full.addEventListener("click", () =>
-    handleFullScreen(terminalApp.window)
+  handleFullScreen(terminalApp.window)
 );
 
 terminalApp.opening.addEventListener("click", () =>
   open_window(terminalApp.window, terminalApp.point, terminalApp.app_name)
 );
 
-  // App draggable
+// App draggable
 $(function () {
-    $(".terminal").draggable();
-    $(".note").draggable();
-    $(".calculator").draggable();
-    $(".Vscode").draggable();
-    $(".spotlight_serach").draggable();
-    $(".maps").draggable();
-  });
+  $(".terminal").draggable();
+  $(".note").draggable();
+  $(".calculator").draggable();
+  $(".Vscode").draggable();
+  $(".spotlight_serach").draggable();
+  $(".maps").draggable();
+});
 
- // Initialize terminal line HTML template
+// Initialize terminal line HTML template
 let terminalLineHTML = $(".terminal_line").html();
 let path = "~"; // Current directory path
 let dirs = ["Desktop", "Downloads", "Music", "Documents"]; // Initial directories
@@ -218,7 +232,7 @@ function removeDirectory() {
 
 // Display system stats (mock)
 function showSystemStats() {
-  return "CPU = 56% <br> MEMORY = 25% <br> DISK = 34%";
+  return "CPU = 56%  MEMORY = 25%  DISK = 34%";
 }
 
 // Display file content (mock)
@@ -234,7 +248,9 @@ function showDiskUsage() {
 // Update the terminal with the new command and output
 function updateTerminal(command, commandOutput) {
   $(".cursor").removeAttr("contenteditable").removeClass("cursor");
-  terminalApp.content.append(commandOutput).append(terminalLineHTML.replace("~", path));
+  terminalApp.content
+    .append(commandOutput)
+    .append(terminalLineHTML.replace("~", path));
   placeCaretAtEnd(document.querySelector(".cursor"));
 }
 
@@ -256,3 +272,22 @@ initTerminalLine();
 terminalApp.content.addEventListener("click", () => {
   placeCaretAtEnd(document.querySelector(".cursor"));
 });
+
+notesApp.adding.addEventListener("click", handleAdding);
+notesApp.backfull.addEventListener("click", () =>
+  handleMinimize(notesApp.window)
+);
+
+notesApp.close.addEventListener("click", () =>
+  close_window(notesApp.window, notesApp.point, notesApp.app_name)
+);
+
+notesApp.deleting.addEventListener("click", handleDeleting);
+
+notesApp.full.addEventListener("click", () =>
+  handleFullScreen(notesApp.window)
+);
+notesApp.window.addEventListener("click", handleNotes);
+notesApp.opening.addEventListener("click", () =>
+  open_window(notesApp.window, notesApp.point, notesApp.app_name)
+);

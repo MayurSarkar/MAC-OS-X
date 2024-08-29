@@ -621,6 +621,113 @@ li.app_name {
     color: #1f48ff;
   }
 
+  .window__taskbar--right {
+    width: 60%;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  @media screen and (max-width: 900px) {
+    .window__taskbar--right {
+      width: 70%;
+    }
+  }
+
+  .Customize__icon span {
+    border: 1px solid rgba(204, 200, 200, 0.412);
+    border-radius: 9px;
+    transition: 0.2s;
+    padding: 5px;
+    cursor: url(../cursor/Link.cur), pointer;
+  }
+  
+  .window__taskbar--right .containerSearch{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 45%;
+    height: 75%;
+    background-color: var(--app-color-white);
+    border-radius: 5px;
+    border: 1px solid rgba(123, 123, 123, 0.412);
+    padding-left: 8px;
+  }
+  .window__taskbar--right .containerSearch svg {
+    fill: rgba(123, 123, 123, 0.412);
+  }
+  .window__taskbar--right input[type="search"] {
+    width: 85%;
+    height: 100%;
+    background-color: transparent;
+    color: var(--color-black);
+    font-size: 18px;
+    padding-right: 10px;
+    font-family: "Lexend", sans-serif;
+  }
+  .window .content {
+    width: 100%;
+    height: 92%;
+    display: flex;
+  }
+
+  .content__sidebar {
+    width: 30%;
+    height: 100%;
+    background: var(--color-white-400);
+    backdrop-filter: blur(1rem);
+  }
+  .content__sidebar--notes {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: transparent;
+  }
+  .content__sidebar--notes input {
+    width: 85%;
+    padding-left: 10px;
+    height: 10%;
+    font-family: "Lexend", sans-serif;
+    font-size: 18px;
+    outline: none;
+    color: var(--color-black);
+    transition: all 0.2s;
+    border-radius: 4px;
+    margin: 10px auto;
+    font-weight: 100;
+    display: block;
+    transition: 0.3s;
+  }
+  .content__sidebar--notes input:hover {
+    background-color: rgba(0, 0, 0, 0.336);
+  }
+  
+  .content__sidebar--notes input::placeholder {
+    color: white;
+  }
+  .content__typing {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    display: none;
+    color: var(--color-black);
+    font-weight: 900;
+    font-size: 18px;
+    font-family: "Raleway", sans-serif;
+    padding: 16px;
+  }
+  
+  .Parent__content--typing {
+    width: 70%;
+    height: 100%;
+    border-top: 1px solid #e0e2e1;
+    background-color: var(--app-color-white);
+  }
+  
 @keyframes zoom-out {
   0% {
     transform: scale(1);
