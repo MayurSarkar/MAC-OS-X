@@ -273,6 +273,25 @@ terminalApp.content.addEventListener("click", () => {
   placeCaretAtEnd(document.querySelector(".cursor"));
 });
 
+// Notes app function start
+function handleAdding() {
+  const create_input = document.createElement("input");
+  create_input.placeholder = "Writing name";
+  notesApp.adding.append(create_input);
+}
+
+function handleDeleting() {
+  const inputChild = document.querySelector(".content__sidebar--notes input");
+  inputChild.remove();
+  notesApp.content_typing.style.display = "none";
+}
+
+function handleNotes() {
+  notesApp.content_typing.style.display = "block";
+}
+
+// Notes app function end
+
 notesApp.adding.addEventListener("click", handleAdding);
 notesApp.backfull.addEventListener("click", () =>
   handleMinimize(notesApp.window)
